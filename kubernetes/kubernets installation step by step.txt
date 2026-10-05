@@ -1,0 +1,64 @@
+First Install few dependent packages and Docker Application.
+
+$ apt update && apt install -y apt-transport-https ca-certificates curl software-properties-common docker.io -y
+
+# After Docker Installation, we can start docker service using below command:
+$ systemctl enable docker.service
+
+# Verify the Docker Installation by running below command:
+$ docker --version
+
+## Now Proceed with K8s Installations ## First add gpg-key and then update repo details by cat command.
+
+$ curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+
+$ cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+# Install the Kubernetes packages by below command:	
+$ apt update && apt install -y kubelet kubeadm kubectl
+
+# Now, load the daemon and restart the service by below command:
+$ systemctl daemon-reload && systemctl restart kubelet
+
+========================RUN Below Commands only on Master Node======================
+# To Initialize kubernetes on Master Node (only on Master Node):
+
+$ kubeadm init
+
+# wait for sometime & if all goes well it will say(below msg)...alongwith few instructions(follow those instructions):
+---
+Your Kubernetes control-plane has initialized successfully!
+
+To start using your cluster, you need to run the following as a regular user:
+
+  mkdir -p $HOME/.kube
+  sudo cp -i /etc/kubernetes/admin.conf $HOME/.kube/config
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+Alternatively, if you are the root user, you can run:
+
+  export KUBECONFIG=/etc/kubernetes/admin.conf
+
+You should now deploy a pod network to the cluster.
+Run "kubectl apply -f [podnetwork].yaml" with one of the options listed at:
+  https://kubernetes.io/docs/concepts/cluster-administration/addons/
+
+Then you can join any number of worker nodes by running the following on each as root:
+
+kubeadm join 172.31.19.196:6443 --token jx7bid.of1vgc7gb3v9fyfv \
+        --discovery-token-ca-cert-hash sha256:b92e5738167327c13e3e52b3ab212e0bf2efd87d2734c5d19039bc108dea4670
+
+
+
+----------------------------
+
+## Deploy Pod-Network (here we are using Calico Pod Network)
+$ kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+
+$ kubectl get nodes
+
+##-----Use something like below Token for adding worker nodes (copy&paste on worker nodes one-by-one):
+
+------------------------------

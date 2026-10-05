@@ -1,0 +1,60 @@
+  1  clarr
+    2  clear
+    3  apt update && apt install -y apt-transport-https ca-certificates curl software-properties-common docker.io -y
+    4  systemctl enable docker.service
+    5  clear
+    6  docker --version
+    7  curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+    8  cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+  deb https://apt.kubernetes.io/ kubernetes-xenial main
+  EOF
+
+
+apt update && apt install -y kubelet kubeadm kubectl
+cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+  deb https://apt.kubernetes.io/ kubernetes-xenial main
+  EOF
+
+    9  cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+  deb https://apt.kubernetes.io/ kubernetes-xenial main
+  EOF
+
+
+   10  cat <<EOF >/etc/apt/sources.list.d/kubernetes.list
+deb https://apt.kubernetes.io/ kubernetes-xenial main
+EOF
+
+   11  clear
+   12  apt update && apt install -y kubelet kubeadm kubectl
+   13  systemctl daemon-reload && systemctl restart kubelet
+   14  clear
+   15  kubeadm init
+   16  ls /etc/kubernetes/pki"
+   17  ls /etc/kubernetes/pki
+   18  kubectl apply -f https://docs.projectcalico.org/v3.8/manifests/calico.yaml
+   19  kubectl get nodes
+   20  clear
+   21  kubectl get nodes
+   22  kubectl get node
+   23  kubectl get nodes
+   24  kubectl version
+   25  kubectl version --short
+   26  kubectl cluster-info
+   27  clear
+   28  kubectl get namespaces
+   29  kubectl get nodes
+   30  kubectl get all --namespace kube-public
+   31  kubectl get all --namespace kube-system
+   32  clear
+   33  kubectl get pods
+   34  kubectl get pod
+   35  kubectl run test123 --image=nginx
+   36  kubectl get pods
+   37  clear
+   38  kubectl get pods
+   39  kubectl describe pod test123
+   40  clear
+   41  kubectl get pods
+   42  kubectl get pod --output wide
+   43  kubectl get pod -o wide
+   44  history
